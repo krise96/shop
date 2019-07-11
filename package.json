@@ -1,9 +1,10 @@
 {
   "name": "shop",
-  "version": "0.0.0",
+  "author": "Mykola Krys",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve -o",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

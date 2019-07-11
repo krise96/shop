@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ProductsService } from '../services/products.service';
-import { ProductModel } from '../../shared/models/product/product.model';
+import { ProductsService } from '../../services/products.service';
+import { ProductModel } from '../../../shared/models/product/product.model';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -18,7 +18,6 @@ export class ProductComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.productsSubsrcibtion = this.productService.fetchProdycts().subscribe((data) => {
       this.products = data;
-      console.log('it works', this.products);
     });
   }
 
