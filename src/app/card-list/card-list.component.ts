@@ -18,10 +18,11 @@ export class CardListComponent implements OnInit {
   constructor(private cardService: CardService, private productService: ProductsService) { }
 
   ngOnInit() {
+    // нет отписки
     this.productsSubsrcibtion = this.productService.fetchProdycts().subscribe((data) => {
       this.products = data;
     });
-    this.cardProducts = this.cardService.productList;
+    this.cardProducts = this.cardService.productList; // не понял, где используется
   }
 
   get cardProductsItem(): Array<ProductModel> {

@@ -8,6 +8,7 @@ import { CardService } from 'src/app/shared/services/card/card.service';
   styleUrls: ['./item.component.scss']
 })
 export class ItemComponent implements OnInit {
+  // для этого кейса ок, но, обычно, можно использовать один инпут и передать объект
   @Input() id: number;
   @Input() name: string;
   @Input() description: string;
@@ -27,6 +28,10 @@ export class ItemComponent implements OnInit {
   }
 
   onBuy(id: number) {
+    // этот компонент не является владельцем данных
+    // он их получил
+    // значит не стоит ему что-то с ними делать
+    // пусть генерит аутпут
     this.cardService.addToCardProducts(id);
   }
 

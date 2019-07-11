@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 })
 export class ProductComponent implements OnInit, OnDestroy {
 
+  // то, что используем в шаблоне должно быть public
   private products: Array<ProductModel>;
   private productsSubsrcibtion: Subscription;
 
