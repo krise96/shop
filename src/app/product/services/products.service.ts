@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
 
-import { ProductModel, ProductTypes } from '../../shared/models/product/product.model';
+import {
+  ProductModel,
+  ProductTypes
+} from '../../shared/models/product/product.model';
 import { Observable } from 'rxjs';
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
-
-  constructor() { }
+  constructor() {}
 
   fetchProdycts(): Observable<Array<ProductModel>> {
-    return new Observable((observer) => {
+    // Как вариант return of(this.products)
+    return new Observable(observer => {
       observer.next(this.products);
       observer.complete();
     });
