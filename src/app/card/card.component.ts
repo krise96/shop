@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CardService } from '../shared/services/card/card.service';
 
 @Component({
@@ -6,12 +6,10 @@ import { CardService } from '../shared/services/card/card.service';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss']
 })
-export class CardComponent implements OnInit {
+export class CardComponent {
 
   constructor(private cardService: CardService) { }
 
-  ngOnInit() {
-  }
 
   get count(): number {
     return this.cardService.cardCount();

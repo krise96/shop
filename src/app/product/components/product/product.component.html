@@ -1,12 +1,7 @@
 <div class="product-wrapper">
   <app-item
     *ngFor="let product of products"
-    [id]="product.id"
-    [name]="product.name"
-    [description]="product.description"
-    [category]="product.category"
-    [price]="product.price"
-    [isAvailable]="product.isAvailable"
+    [product]="product"
   >
   </app-item>
 </div>

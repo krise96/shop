@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ProductTypes } from 'src/app/shared/models/product/product.model';
+import { Component, Input, OnInit } from '@angular/core';
+import { ProductModel } from 'src/app/shared/models/product/product.model';
 import { CardService } from 'src/app/shared/services/card/card.service';
 
 @Component({
@@ -8,18 +8,14 @@ import { CardService } from 'src/app/shared/services/card/card.service';
   styleUrls: ['./item.component.scss']
 })
 export class ItemComponent implements OnInit {
-  @Input() id: number;
-  @Input() name: string;
-  @Input() description: string;
-  @Input() price: string;
-  @Input() category: ProductTypes;
-  @Input() isAvailable: boolean;
+
+  @Input() product: ProductModel;
 
   constructor(private cardService: CardService) {
   }
 
   ngOnInit() {
-    console.log('isAvailable', this.isAvailable, typeof this.isAvailable);
+    console.log('isAvailable', this.product.isAvailable, typeof this.product.isAvailable);
   }
 
   buttonText(id: number) {

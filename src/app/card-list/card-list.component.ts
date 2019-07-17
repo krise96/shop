@@ -11,8 +11,8 @@ import { Subscription } from 'rxjs';
 })
 export class CardListComponent implements OnInit {
 
-  private products: Array<ProductModel>;
-  private cardProducts: Array<number>;
+  public products: Array<ProductModel>;
+  public cardProducts: Array<number>;
   private productsSubsrcibtion: Subscription;
 
   constructor(private cardService: CardService, private productService: ProductsService) { }
@@ -31,10 +31,10 @@ export class CardListComponent implements OnInit {
   }
 
   get totalPrice(): number {
-    return this.cardProductsItem.reduce((a, b) => a + b.price, 0);
+    return this.cardProductsItem.reduce((a, b) => a + (b.price * this.cardService.getCountById(b.id)), 0);
   }
 
   onRemove(productId: number) {
-    this.cardService.addToCardProducts(productId);
+    this.cardService.removeIfExist(productId);
   }
 }

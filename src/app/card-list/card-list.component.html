@@ -1,7 +1,7 @@
 <div *ngFor="let product of cardProductsItem">
   <div class="card-item">
-    <p>{{product.name}} {{product.price}}$</p>
-    <button (click)="onRemove(product.id)">Remove from list</button>
+    <p>{{product.name}} {{product.price}}$ * {{cardService.getCountById(product.id)}} = {{product.price * cardService.getCountById(product.id)}}$</p>
+    <button (click)="onRemove(product.id)">Remove one</button>
   </div>
 </div>
 <div class="total-price">
