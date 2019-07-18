@@ -1,0 +1,9 @@
+<app-card-item *ngFor="let product of products"
+               [productWithCount]="productWithCount(product)"
+               (deleteOutput)="onRemove($event)"
+>
+
+</app-card-item>
+<div class="total-price">
+  Total Price: {{cardService.fullPrice}}$
+</div>

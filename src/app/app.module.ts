@@ -2,25 +2,25 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app/components/app.component';
-import { ProductComponent } from './product/components/product/product.component';
-import { ItemComponent } from './product/components/item/item.component';
-import { CardComponent } from './card/card.component';
-import { CardListComponent } from './card-list/card-list.component';
+import { AppComponent } from './app.component';
+import { CardHeaderComponent } from './card-header/card-header.component';
+import { SharedModule } from './shared/shared.module';
+import { ProductModule } from './product/product.module';
+import { CardListModule } from './card-list/card-list.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProductComponent,
-    ItemComponent,
-    CardComponent,
-    CardListComponent
+    CardHeaderComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SharedModule,
+    ProductModule,
+    CardListModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, CardHeaderComponent]
 })
 export class AppModule { }

@@ -2,12 +2,9 @@
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
+  border: 5px solid black;
   margin-bottom: 10px;
   p {
     display: inline;
   }
-}
-
-.total-price {
-  border-top: 1px solid black; 
 }

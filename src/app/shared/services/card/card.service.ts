@@ -1,25 +1,45 @@
 import { Injectable } from '@angular/core';
+import { ProductsService } from '../../../product/services/products.service';
+import { Subscription } from 'rxjs';
+import { ProductModel } from '../../models/product/product.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CardService {
-  private cardProducts: Array<number>;
-  constructor() {
+  public cardProducts: Array<ProductModel>;
+  private cardProductIds: Array<number>;
+  private productsSubscription: Subscription;
+
+  constructor(private productService: ProductsService) {
     this.productsFromLS();
+    this.loadProducts();
+  }
+
+  get fullPrice(): number {
+    return this.cardProducts.reduce((a, b) => a + (b.price * this.getCountById(b.id)), 0);
+  }
+
+  loadProducts(): void {
+    if (this.productsSubscription) {
+      this.productsSubscription.unsubscribe();
+    }
+    this.productsSubscription =
+      this.productService.fetchProducts().subscribe((data) => {
+        this.cardProducts = data.filter((product) =>
+          this.isThisProductInCard(product.id)
+        );
+    });
   }
 
   isThisProductInCard(productId: number): boolean {
-    return this.cardProducts.findIndex((element) => (element === productId)) !== -1;
+    return this.cardProductIds.findIndex((element) => (element === productId)) !== -1;
   }
 
-  get productList(): Array<number> {
-    return JSON.parse(localStorage.getItem('products'));
-  }
-
-  addToCardProducts(productId: number) {
-    this.cardProducts.push(productId);
-    localStorage.setItem('products', JSON.stringify(this.cardProducts));
+  addToCardProductIds(productId: number) {
+    this.cardProductIds.push(productId);
+    localStorage.setItem('products', JSON.stringify(this.cardProductIds));
+    this.loadProducts();
   }
 
   cardCount(): number {
@@ -28,18 +48,19 @@ export class CardService {
   }
 
   getCountById(productId: number): number {
-    return this.cardProducts.filter((el) => el === productId).length;
+    return this.cardProductIds.filter((el) => el === productId).length;
   }
 
   removeIfExist(productId: number): void {
-    const index = this.cardProducts.indexOf(productId);
+    const index = this.cardProductIds.indexOf(productId);
     if (index > -1) {
-      this.cardProducts.splice(index, 1);
-      localStorage.setItem('products', JSON.stringify(this.cardProducts));
+      this.cardProductIds.splice(index, 1);
+      localStorage.setItem('products', JSON.stringify(this.cardProductIds));
+      this.loadProducts();
     }
   }
 
   private productsFromLS() {
-    this.cardProducts = JSON.parse(localStorage.getItem('products')) || [];
+    this.cardProductIds = JSON.parse(localStorage.getItem('products')) || [];
   }
 }

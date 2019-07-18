@@ -1,10 +1,10 @@
-<div class="item">
+<div class="item" appHover>
   <h3>{{product.name}}</h3>
   <p>Category: {{product.category}}</p>
   <p>{{product.description}}</p>
   <p>{{product.price}}$</p>
-  <button *ngIf="product.isAvailable; else notAvaible" (click)=onBuy(product.id)>{{buttonText(product.id)}}</button>
-  <ng-template #notAvaible>
+  <button *ngIf="product.isAvailable; else notAvailable" (click)=onBuy(product.id)>Buy</button>
+  <ng-template #notAvailable>
     <p>Not available at the moment</p>
   </ng-template>
 </div>

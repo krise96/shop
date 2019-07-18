@@ -3,10 +3,10 @@ import { CardService } from '../shared/services/card/card.service';
 
 @Component({
   selector: 'app-card',
-  templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss']
+  templateUrl: './card-header.component.html',
+  styleUrls: ['./card-header.component.scss']
 })
-export class CardComponent {
+export class CardHeaderComponent {
 
   constructor(private cardService: CardService) { }
 
