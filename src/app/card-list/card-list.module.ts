@@ -12,6 +12,7 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     SharedModule
   ],
+  // CardItemComponent - может быть приватным
   exports: [CardItemComponent, CardListComponent],
 })
 export class CardListModule { }

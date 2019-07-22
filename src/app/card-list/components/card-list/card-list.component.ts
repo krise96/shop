@@ -12,6 +12,7 @@ export class CardListComponent implements OnInit {
 
   public products: Array<ProductModel>;
 
+  // Приватный сервис, но используется в шаблоне
   constructor(private cardService: CardService) { }
 
   ngOnInit() {

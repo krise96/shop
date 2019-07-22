@@ -21,6 +21,9 @@ import { CardListModule } from './card-list/card-list.module';
     CardListModule
   ],
   providers: [],
+  // Действительно тут надо указывать CardHeaderComponent?
+  // Этот компонент используется в шаблоне рутового.
+  // Тут он не нужен.
   bootstrap: [AppComponent, CardHeaderComponent]
 })
 export class AppModule { }

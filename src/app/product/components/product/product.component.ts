@@ -14,6 +14,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   public products: Array<ProductModel>;
   private productsSubscription: Subscription;
 
+  // приватный сервис не должен использоваться в шаблоне
   constructor(private productService: ProductsService, private cardService: CardService) {
   }
 
