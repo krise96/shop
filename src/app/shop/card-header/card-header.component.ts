@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CardService } from '../shared/services/card/card.service';
+import { CardService } from '../../core/services/card.service';
 
 @Component({
   selector: 'app-card',
@@ -9,10 +9,5 @@ import { CardService } from '../shared/services/card/card.service';
 export class CardHeaderComponent {
 
   constructor(private cardService: CardService) { }
-
-
-  get count(): number {
-    return this.cardService.cardCount();
-  }
 
 }

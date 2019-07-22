@@ -13,3 +13,9 @@ Moved total price logic into card service, now card service is working with prod
 Added first directive, now when user are going to hover mouse in the block, that block will change border color
 
 Used modules in the Mykola's shop app.
+
+----------------
+Added about us component, added a lot of services, made some refactoring connected with folders structure.
+Updated hoverDirective, with input.
+
+Updated card service, added a lot of methods, to change size of card

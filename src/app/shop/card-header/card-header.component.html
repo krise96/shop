@@ -1,0 +1,7 @@
+<span>
+ <p routerLink="/card-list" routerLinkActive="router-link-active" >
+   Your card: {{cardService.cardCount() > 0 ? "(" + cardService.cardCount() + ")" + " items" : ''}}
+   Total price: {{cardService.totalCost}}$
+ </p>
+  <p routerLink="/about" routerLinkActive="router-link-active" >about us</p>
+</span>

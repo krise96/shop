@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardItemComponent } from './components/card-item/card-item.component';
 import { CardListComponent } from './components/card-list/card-list.component';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 
 
 

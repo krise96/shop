@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ProductsService } from '../../services/products.service';
-import { ProductModel } from '../../../shared/models/product/product.model';
+import { ProductsService } from '../../../../core/services/products.service';
+import { ProductModel } from '../../../../shared/models/product/product.model';
 import { Subscription } from 'rxjs';
-import { CardService } from '../../../shared/services/card/card.service';
+import { CardService } from '../../../../core/services/card.service';
 
 @Component({
   selector: 'app-product',
