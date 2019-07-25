@@ -3,7 +3,9 @@ import { GeneratorFactoryService } from './generator-factory.service';
 
 function generatorFactoryService(length: number = 0) {
   return (factory: GeneratorFactoryService) => {
-    return new GeneratorService(factory.generate(length));
+    // Не понял для чего тут GeneratorService
+    // return new GeneratorService(factory.generate(length));
+    return factory.generate(length);
   };
 }
 
@@ -13,10 +15,9 @@ function generatorFactoryService(length: number = 0) {
   deps: [GeneratorFactoryService]
 })
 export class GeneratorService {
+  // str: string;
 
-  str: string;
-
-  constructor(str) {
-    this.str = str;
-  }
+  // constructor(str) {
+  //   this.str = str;
+  // }
 }
