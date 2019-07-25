@@ -12,22 +12,26 @@ import { GeneratorFactoryService } from '../../core/services/generator-factory.s
 })
 export class AboutComponent {
 
+
   constructor(
-    @Optional() private localStorageService: LocalStorageService,
+    // То, что используется в шаблоне, делаем публичным
+    @Optional() public localStorageService: LocalStorageService,
     @Optional() private configService: ConfigOptionsService,
-    @Optional() private constantsService: ConstantsService,
-    @Optional() private generatorService: GeneratorService,
-    @Optional() private generatorFactoryService: GeneratorFactoryService
-  ) {
-    this.configService.setSettings([{
-      name: 'login',
-      value: 'mykola_krys',
-    },
+    @Optional() public constantsService: ConstantsService,
+    @Optional() public generatorService: GeneratorService
+  ) // @Optional() private generatorFactoryService: GeneratorFactoryService
+  {
+    this.configService.setSettings([
+      {
+        name: 'login',
+        value: 'mykola_krys'
+      },
       {
         name: 'email',
-        value: 'krise96@gmail.com',
-      }]
-      );
+        value: 'krise96@gmail.com'
+      }
+    ]);
     console.log(this.configService.getSettings());
+    console.log(this.generatorService);
   }
 }
