@@ -3,15 +3,25 @@ import { CardService } from '../../../../core/services/card.service';
 import { ProductModel } from '../../../../shared/models/product/product.model';
 import { CardItemType } from '../../models/card-item.types';
 import { DeleteOutput } from '../../../../shared/models/delete.output.types';
+import { OrderPipe } from '../../../../shared/pipes/order.pipe';
 
 @Component({
   selector: 'app-card-list',
   templateUrl: './card-list.component.html',
   styleUrls: ['./card-list.component.scss']
 })
-export class CardListComponent {
+export class CardListComponent implements OnInit {
 
-  constructor(private cardService: CardService) { }
+  public products: Array<CardItemType>;
+
+  constructor(
+    private cardService: CardService,
+    private order: OrderPipe
+  ) { }
+
+  ngOnInit(): void {
+    this.products = this.cardService.cardProductsWithCount;
+  }
 
   onRemove(deleteOutput: DeleteOutput) {
     if (!deleteOutput.multiple) {
@@ -21,11 +31,8 @@ export class CardListComponent {
     }
   }
 
-  productWithCount(product: ProductModel): CardItemType {
-    return {
-      product,
-      count: this.cardService.getCountById(product.id)
-    };
+  sortProducts(field: string, direction: boolean) {
+    this.products = this.order.transform(this.cardService.cardProductsWithCount, field, direction);
   }
 
   clear() {

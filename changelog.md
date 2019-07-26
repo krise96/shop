@@ -19,3 +19,11 @@ Added about us component, added a lot of services, made some refactoring connect
 Updated hoverDirective, with input.
 
 Updated card service, added a lot of methods, to change size of card
+
+------------------
+
+Added new pipes for sorting logic, now we can sort in card and in products -list by count and by price, also tried default pipes, and async one for test
+
+will fix comments in next home work.
+
+------------------

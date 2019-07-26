@@ -3,6 +3,7 @@ import { ProductsService } from './products.service';
 import { Subscription } from 'rxjs';
 import { ProductModel } from '../../shared/models/product/product.model';
 import { LocalStorageService } from './local-storage.service';
+import { CardItemType } from '../../shop/card-list/models/card-item.types';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,15 @@ export class CardService {
   constructor(private productService: ProductsService, private localStorageService: LocalStorageService) {
     this.productsFromLS();
     this.loadProducts();
+  }
+
+  get cardProductsWithCount(): Array<CardItemType> {
+    return this.cardProducts.map((product) => {
+      return {
+        product,
+        count: this.getCountById(product.id)
+      };
+    });
   }
 
   recalculateTotalCost(): void {

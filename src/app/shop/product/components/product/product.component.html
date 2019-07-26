@@ -1,3 +1,22 @@
+<h1>{{asyncTitle | async}}</h1>
+<select #sortField (change)="sortProducts(sortField.value, sortDirection.checked)">
+  <option value="price">PRICE</option>
+</select>
+ASC
+<input
+  #sortDirection
+  type="radio"
+  name="direction"
+  checked
+  (change)="sortProducts(sortField.value, sortDirection.checked)"
+>
+DESC
+<input
+  type="radio"
+  name="direction"
+  (change)="sortProducts(sortField.value, sortDirection.checked)"
+>
+
 <div class="product-wrapper">
   <app-item
     *ngFor="let product of products"
