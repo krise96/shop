@@ -1,0 +1,30 @@
+<select #sortField (change)="sortProducts(sortField.value, sortDirection.checked)">
+  <option value="count">COUNT</option>
+  <option value="product.price">PRICE</option>
+</select>
+ASC
+<input
+  #sortDirection
+  type="radio"
+  name="direction"
+  checked
+  (change)="sortProducts(sortField.value, sortDirection.checked)"
+>
+DESC
+<input
+  type="radio"
+  name="direction"
+  (change)="sortProducts(sortField.value, sortDirection.checked)"
+>
+<app-card-item *ngFor="let product of products"
+               [productWithCount]="product"
+               (deleteOutput)="onRemove($event)"
+>
+
+</app-card-item>
+<div class="total-price">
+  Total Price: {{cardService.totalCost}}$
+</div>
+<div class="clear-card">
+  <button (click)="clear()">Remove ALL items</button>
+</div>

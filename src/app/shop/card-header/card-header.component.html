@@ -1,0 +1,11 @@
+<div class="card-header">
+    <p routerLink="/about" routerLinkActive="router-link-active" >about us</p>
+    <p *ngIf="authService.isLogined" routerLink="/card-list" routerLinkActive="router-link-active" >
+      Your card: {{cardService.cardCount() > 0 ? "(" + cardService.cardCount() + ")" + " items" : ''}}
+      Total price: {{cardService.totalCost}}$
+    </p>
+    <span *ngIf="authService.isLogined; else login" (click)="onLogout()">Logout</span>
+    <ng-template #login>
+      <p routerLink="/login" routerLinkActive="router-link-active" >Login</p>
+    </ng-template>
+</div>

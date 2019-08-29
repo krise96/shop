@@ -1,0 +1,5 @@
+<div class="card-item" appHover="red">
+  <p>{{productWithCount.product.name}} {{productWithCount.product.price}}$ * {{productWithCount.count}} = {{productWithCount.product.price * productWithCount.count}}$</p>
+  <button (click)="onRemove(productWithCount.product.id)">Remove one</button>
+  <button (click)="onRemoveAll(productWithCount.product.id)">Remove all</button>
+</div>

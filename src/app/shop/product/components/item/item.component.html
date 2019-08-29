@@ -1,0 +1,12 @@
+<div class="item" appHover = "blue">
+  <h3>{{product.name | titlecase}}</h3>
+  <p>Category: {{product.category}}</p>
+  <p>{{product.description | lowercase}}</p>
+  <p>Price {{product.price}}</p>
+  <div *ngIf="authService.isLoginnedAndNotAdmin()">
+    <button *ngIf="product.isAvailable; else notAvailable" (click)=onBuy(product.id)>Buy</button>
+    <ng-template #notAvailable>
+      <p>{{ 'Not available at the moment' | uppercase}}</p>
+    </ng-template>
+  </div>
+</div>
