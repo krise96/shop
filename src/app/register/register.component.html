@@ -1,0 +1,28 @@
+<form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+  <label>Name: </label>
+  <input formControlName="name" placeholder="Name" />
+  <span *ngIf="name.invalid && name.errors.required">
+    name is required.
+  </span>
+  <br />
+
+  <label>Login: </label>
+  <input formControlName="login" placeholder="Login" />
+  <span *ngIf="login.invalid && login.errors.required">
+    login is required.
+  </span>
+
+  <br />
+  <label>Password: </label>
+  <input type="password" formControlName="password" placeholder="Password" />
+  <span *ngIf="password.invalid && password.errors.required">
+    password is required.
+  </span>
+
+  <br />
+  <label>is admin: </label>
+  <input type="checkbox" formControlName="isAdmin" />
+
+  <br />
+  <button [disabled]="!registerForm.valid" type="submit" class="login-form-button">Register</button>
+</form>

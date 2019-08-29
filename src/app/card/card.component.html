@@ -1,1 +1,1 @@
-<p routerLink="/card-list" routerLinkActive="router-link-active" >Your card {{count > 0 ? "(" + count + ")" + " items" : ''}}</p>
+<p *ngIf="authService.isLogined" routerLink="/card-list" routerLinkActive="router-link-active" >Your card {{count > 0 ? "(" + count + ")" + " items" : ''}}</p>

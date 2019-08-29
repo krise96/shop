@@ -7,6 +7,9 @@ import { ProductComponent } from './product/components/product/product.component
 import { ItemComponent } from './product/components/item/item.component';
 import { CardComponent } from './card/card.component';
 import { CardListComponent } from './card-list/card-list.component';
+import { LoginComponent } from './login/components/login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,11 +17,14 @@ import { CardListComponent } from './card-list/card-list.component';
     ProductComponent,
     ItemComponent,
     CardComponent,
-    CardListComponent
+    CardListComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
