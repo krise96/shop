@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ProductsService } from '../../../../core/services/products.service';
+import { Component, OnInit } from '@angular/core';
+import { ProductsService } from '../../../../shared/services/products.service';
 import { ProductModel } from '../../../../shared/models/product/product.model';
-import { Observable, Subscription } from 'rxjs';
-import { CardService } from '../../../../core/services/card.service';
+import { Observable } from 'rxjs';
+import { CardService } from '../../../../shared/services/card.service';
 import { OrderPipe } from '../../../../shared/pipes/order.pipe';
 
 @Component({
@@ -10,11 +10,10 @@ import { OrderPipe } from '../../../../shared/pipes/order.pipe';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })
-export class ProductComponent implements OnInit, OnDestroy {
+export class ProductComponent implements OnInit {
 
   public products: Array<ProductModel>;
   public asyncTitle = new Observable(subscriber => subscriber.next('Mega super title!'));
-  private productsSubscription: Subscription;
 
   constructor(
     private productService: ProductsService, private cardService: CardService,
@@ -23,13 +22,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.productsSubscription = this.productService.fetchProducts().subscribe((data) => {
-      this.products = data;
-    });
-  }
-
-  ngOnDestroy() {
-    this.productsSubscription.unsubscribe();
+    this.products = this.productService.fetchProducts();
   }
 
   sortProducts(field: string, direction: boolean) {

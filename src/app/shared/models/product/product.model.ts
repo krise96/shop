@@ -1,8 +1,10 @@
+import { UserModel } from '../user/user.model';
+
 export enum ProductTypes {
-    Apple,
-    Samsung,
-    Xiaomi,
-    Huawei,
+    Apple = 'Apple',
+    Samsung = 'Samsung',
+    Xiaomi = 'Xiaomi',
+    Huawei = 'Huawei',
 }
 
 export interface ProductModel {
@@ -12,4 +14,18 @@ export interface ProductModel {
   price: number;
   category: ProductTypes;
   isAvailable: boolean;
+  count: number;
+}
+
+export interface CardProducts {
+  id: number;
+  count: number;
+  pricePerOne: number;
+}
+
+export interface Order {
+  cardItems: Array<CardProducts>;
+  time: Date;
+  status: string;
+  owner: UserModel;
 }

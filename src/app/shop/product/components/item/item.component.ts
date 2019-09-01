@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ProductModel } from 'src/app/shared/models/product/product.model';
-import { AuthService } from '../../../../core/services/auth.service';
+import { AuthService } from '../../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-item',

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { CardService } from '../../core/services/card.service';
-import { AuthService } from '../../core/services/auth.service';
+import { CardService } from '../../shared/services/card.service';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-card',
@@ -9,7 +9,7 @@ import { AuthService } from '../../core/services/auth.service';
 })
 export class CardHeaderComponent {
 
-  constructor(private cardService: CardService, private authService: AuthService) { }
+  constructor(public cardService: CardService, private authService: AuthService) { }
 
   public onLogout(): void {
     this.authService.logout();

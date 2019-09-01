@@ -1,0 +1,50 @@
+<div
+  nzType="flex"
+  nz-row
+  nzAlign="middle"
+  nzJustify="center"
+>
+
+  <form class="login-form" #form="ngForm">
+    <h1>Login to Mykola's Shop</h1>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input your login!">
+        <nz-input-group nzPrefixIcon="user">
+          <input
+            type="text"
+            nz-input
+            required
+            [(ngModel)]="loginForm.login"
+            name="login" placeholder="Login"
+          />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input your login!">
+        <nz-input-group nzPrefixIcon="user">
+          <input
+            type="password"
+            required
+            nz-input
+            [(ngModel)]="loginForm.password"
+            name="password" placeholder="Password"
+          />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <button
+      [disabled]="!form.valid"
+      type="submit"
+      nz-button
+      nzType="primary"
+      nzBlock
+      (click)="onLogin()"
+    >Login</button>
+    Or
+    <a routerLink="/auth/register">register now!</a>
+  </form>
+
+</div>

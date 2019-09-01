@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CardService } from '../../../../core/services/card.service';
-import { ProductModel } from '../../../../shared/models/product/product.model';
-import { CardItemType } from '../../models/card-item.types';
+import { CardService } from '../../../../shared/services/card.service';
 import { DeleteOutput } from '../../../../shared/models/delete.output.types';
 import { OrderPipe } from '../../../../shared/pipes/order.pipe';
+import { ProductModel } from '../../../../shared/models/product/product.model';
+import { OrderService } from '../../../../shared/services/order.service';
 
 @Component({
   selector: 'app-card-list',
@@ -12,15 +12,36 @@ import { OrderPipe } from '../../../../shared/pipes/order.pipe';
 })
 export class CardListComponent implements OnInit {
 
-  public products: Array<CardItemType>;
+  public products: Array<ProductModel>;
 
   constructor(
     private cardService: CardService,
+    private orderService: OrderService,
     private order: OrderPipe
   ) { }
 
   ngOnInit(): void {
-    this.products = this.cardService.cardProductsWithCount;
+    this.products = this.cardService.processedProducts;
+  }
+
+  public sortProducts(field: string, direction: boolean) {
+    this.products = this.order.transform(
+      this.cardService.cardProducts,
+      field,
+      direction
+    );
+  }
+
+  public clear() {
+    const confirmResult = confirm('Are you sure want to delete your card list?');
+    if (confirmResult) {
+      this.cardService.clearCard();
+    }
+  }
+
+  public submitOrder() {
+    this.orderService.addOrder(this.cardService.cardProducts);
+    this.cardService.clearCard();
   }
 
   onRemove(deleteOutput: DeleteOutput) {
@@ -28,17 +49,6 @@ export class CardListComponent implements OnInit {
       this.cardService.removeIfExist(deleteOutput.productId);
     } else {
       this.cardService.removeAllItemsById(deleteOutput.productId);
-    }
-  }
-
-  sortProducts(field: string, direction: boolean) {
-    this.products = this.order.transform(this.cardService.cardProductsWithCount, field, direction);
-  }
-
-  clear() {
-    const confirmResult = confirm('Are you sure want to delete your card list?');
-    if (confirmResult) {
-      this.cardService.clearCard();
     }
   }
 }

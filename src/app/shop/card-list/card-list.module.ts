@@ -4,6 +4,7 @@ import { CardItemComponent } from './components/card-item/card-item.component';
 import { CardListComponent } from './components/card-list/card-list.component';
 import { SharedModule } from '../../shared/shared.module';
 import { OrderPipe } from '../../shared/pipes/order.pipe';
+import { NzButtonModule } from 'ng-zorro-antd';
 
 
 
@@ -11,7 +12,8 @@ import { OrderPipe } from '../../shared/pipes/order.pipe';
   declarations: [CardItemComponent, CardListComponent],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    NzButtonModule
   ],
   providers: [OrderPipe],
   exports: [CardItemComponent, CardListComponent],

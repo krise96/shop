@@ -17,7 +17,7 @@ DESC
   (change)="sortProducts(sortField.value, sortDirection.checked)"
 >
 <app-card-item *ngFor="let product of products"
-               [productWithCount]="product"
+               [product]="product"
                (deleteOutput)="onRemove($event)"
 >
 
@@ -26,5 +26,20 @@ DESC
   Total Price: {{cardService.totalCost}}$
 </div>
 <div class="clear-card">
-  <button (click)="clear()">Remove ALL items</button>
+  <button
+    type="submit"
+    nz-button
+    nzType="primary"
+    nzBlock
+    (click)="clear()"
+  >Remove ALL items</button>
+  <br/>
+
+  <button
+    type="submit"
+    nz-button
+    nzType="primary"
+    nzBlock
+    (click)="submitOrder()"
+  >Submit order</button>
 </div>

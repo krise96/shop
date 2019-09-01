@@ -1,0 +1,30 @@
+<nz-list
+  [nzDataSource]="orders"
+  [nzItemLayout]="'vertical'"
+  [nzRenderItem]="item"
+>
+  <ng-template #item let-item>
+    <nz-list-item [nzContent]="item.description" [nzActions]="[priceCount, countCount, availabilityCount, edit]" [nzExtra]="extra">
+      <ng-template #priceCount><i nz-icon nzType="dollar" nzTheme="twotone" style="margin-right: 8px;"></i>{{item.price}}</ng-template>
+      <ng-template #countCount><i nz-icon nzType="calculator" nzTheme="twotone" style="margin-right: 8px;"></i>{{item.count}}</ng-template>
+      <ng-template #availabilityCount>
+        <i nz-icon [nzType]="item.isAvailable ? 'eye' : 'eye-invisible'" nzTheme="twotone" style="margin-right: 8px;"></i>
+        {{item.isAvailable ? 'available' : 'not available'}}
+      </ng-template>
+      <ng-template #edit>
+        <span [routerLink]="['/admin/products/edit/' + item.id]">
+          <i nz-icon nzType="edit" nzTheme="twotone"></i>
+          Edit
+        </span>
+      </ng-template>
+      <nz-list-item-meta [nzAvatar]="item.avatar" [nzTitle]="nzTitle">
+        <ng-template #nzTitle
+        ><a href="{{ item.name }}">{{ item.name }}</a></ng-template
+        >
+      </nz-list-item-meta>
+      <ng-template #extra>
+        <img width="272" alt="logo" src="https://png.pngtree.com/element_our/png_detail/20181227/smartphone-glyph-black-icon-png_293024.jpg" />
+      </ng-template>
+    </nz-list-item>
+  </ng-template>
+</nz-list>

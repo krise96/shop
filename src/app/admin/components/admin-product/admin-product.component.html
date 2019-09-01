@@ -1,0 +1,14 @@
+<h3 class="manage-product-title">Manage product:</h3>
+<app-admin-product-form
+  *ngIf="!product"
+  (whenSubmit)="createProduct($event)"
+  saveButtonText="Create new product"
+>
+</app-admin-product-form>
+<app-admin-product-form
+  *ngIf="product"
+  (whenSubmit)="updateProduct($event)"
+  [product]="product"
+  saveButtonText="Update product"
+>
+</app-admin-product-form>

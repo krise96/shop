@@ -1,0 +1,91 @@
+<h1>{{saveButtonText}}</h1>
+
+<form #form="ngForm" class="product-form">
+
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your Name!">
+      <nz-input-group nzPrefixIcon="phone">
+        <input
+          nz-input
+          required
+          [(ngModel)]="product.name"
+          name="name" placeholder="Name"
+        />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your description!">
+      <textarea
+        rows="7"
+        nz-input
+        required
+        [(ngModel)]="product.description"
+        name="description" placeholder="description"
+      ></textarea>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your Category!">
+      <nz-select
+        style="width: 100%;"
+        nzShowSearch
+        nzPlaceHolder="Select a Category"
+        required
+        name="category"
+        [(ngModel)]="product.category"
+      >
+        <nz-option
+          *ngFor="let category of categories | keys"
+          [nzValue]="category"
+          [nzLabel]="category"
+        >{{category}}</nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input price!">
+      <nz-input-number
+        required
+        style="width: 100%;"
+        [(ngModel)]="product.price"
+        name="price"
+        nzPlaceHolder="Price"
+      ></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input Count!">
+      <nz-input-number
+        required
+        style="width: 100%;"
+        [(ngModel)]="product.count"
+        name="count"
+        nzPlaceHolder="Count"
+      ></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <label
+      name="isAvailable"
+      nz-checkbox
+      [(ngModel)]="product.isAvailable"
+    >Is Available</label>
+  </nz-form-item>
+
+
+  <button
+    [disabled]="!form.valid"
+    type="submit"
+    nz-button
+    nzType="primary"
+    nzBlock
+    (click)="onSubmit()"
+  >{{saveButtonText}}</button>
+  back to
+  <a routerLink="/admin/products">Products page</a>
+</form>

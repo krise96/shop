@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CardItemType } from '../../models/card-item.types';
 import { DeleteOutput } from '../../../../shared/models/delete.output.types';
+import { ProductModel } from '../../../../shared/models/product/product.model';
 
 @Component({
   selector: 'app-card-item',
@@ -9,7 +9,7 @@ import { DeleteOutput } from '../../../../shared/models/delete.output.types';
 })
 export class CardItemComponent {
 
-  @Input() productWithCount: CardItemType;
+  @Input() product: ProductModel;
   @Output() deleteOutput = new EventEmitter<DeleteOutput>();
 
   constructor() { }

@@ -7,28 +7,41 @@ import { SharedModule } from './shared/shared.module';
 import { ProductModule } from './shop/product/product.module';
 import { CardListModule } from './shop/card-list/card-list.module';
 import { AboutComponent } from './shop/about/about.component';
-import { LoginComponent } from './shop/login/components/login/login.component';
-import { RegisterComponent } from './shop/register/register.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
+import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+import { AuthModule } from './auth/auth.module';
+import { AdminModule } from './admin/admin.module';
+import { OrderComponent } from './shop/order/order.component';
+
+registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     CardHeaderComponent,
-    RegisterComponent,
-    AboutComponent
+    AboutComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AuthModule,
+    AdminModule,
     SharedModule,
     ProductModule,
     CardListModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    NgZorroAntdModule,
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent, CardHeaderComponent]
 })
 export class AppModule { }
