@@ -2,22 +2,21 @@ import { Injectable } from '@angular/core';
 import { UserModel } from '../models/user/user.model';
 import { LocalStorageService } from './local-storage.service';
 import { Router } from '@angular/router';
-import { CardService } from './card.service';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-
   private usersList: Array<UserModel>;
   public isLogined: boolean;
   public activeUser: UserModel;
+  public usersUpdate$: Subject<UserModel> = new Subject();
 
   constructor(
     private localStorageService: LocalStorageService,
     private router: Router,
-    private cardService: CardService,
   ) {
     this.initLoadUsers();
   }
@@ -69,8 +68,8 @@ export class AuthService {
       this.isLogined = true;
       this.activeUser = user;
       this.updateActiveUser();
-      this.cardService.updateCardStateForUser();
       this.router.navigateByUrl('/');
+      this.usersUpdate$.next(this.activeUser);
     }
     return !!user;
   }
@@ -78,6 +77,7 @@ export class AuthService {
   public logout(): void {
     this.isLogined = false;
     this.activeUser = null;
+    this.usersUpdate$.next(this.activeUser);
     this.changeUserLocalStorageState();
   }
 

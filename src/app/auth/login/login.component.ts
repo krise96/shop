@@ -12,7 +12,10 @@ export class LoginComponent implements OnInit {
 
   public loginForm: UserModel = { login: null, password: null};
 
-  constructor(private authService: AuthService, private message: MessageService) { }
+  constructor(
+    private authService: AuthService,
+    private message: MessageService
+  ) { }
 
   ngOnInit() {
   }

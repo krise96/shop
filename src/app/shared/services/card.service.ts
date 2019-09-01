@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import { ProductsService } from './products.service';
-import { Order, ProductModel } from '../models/product/product.model';
+import { ProductModel } from '../models/product/product.model';
 import { LocalStorageService } from './local-storage.service';
 import { AuthService } from './auth.service';
 import { MessageService } from './message.service';
 import { CardProducts } from '../models/product/product.model';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CardService {
   public cardProducts: Array<CardProducts>;
+  public cardProductsUpdate$: Subject<Array<ProductModel>> = new Subject();
   public processedProducts: Array<ProductModel>;
   public totalCost: number;
   public itemsInCard: number;
@@ -25,6 +27,8 @@ export class CardService {
     this.loadAllProductFromCard();
     this.recalculateTotalCost();
     this.recalculateItemsInCard();
+
+    this.updateUserSubscription();
   }
 
   public clearCard(): void {
@@ -77,6 +81,7 @@ export class CardService {
   public updateCardStateForUser(): void {
     LocalStorageService.stringifyItem(this.keyForUserCards, this.cardProducts);
     this.loadProductsForCurrentUser();
+    this.loadAllProductFromCard();
     this.recalculateTotalCost();
     this.recalculateItemsInCard();
   }
@@ -101,6 +106,13 @@ export class CardService {
     ).map(processedProduct => {
       processedProduct.count = this.findCardProductById(processedProduct.id).count;
       return processedProduct;
+    });
+    this.cardProductsUpdate$.next(this.processedProducts);
+  }
+
+  private updateUserSubscription(): void {
+    this.authService.usersUpdate$.subscribe(() => {
+      this.updateCardStateForUser();
     });
   }
 
