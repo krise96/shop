@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { ProductsService } from './products.service';
-import { Order, ProductModel } from '../models/product/product.model';
+import { ProductModel } from '../models/product/product.model';
 import { LocalStorageService } from './local-storage.service';
 import { AuthService } from './auth.service';
 import { MessageService } from './message.service';
 import { CardProducts } from '../models/product/product.model';
+import { BehaviorSubject } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CardService {
-  public cardProducts: Array<CardProducts>;
-  public processedProducts: Array<ProductModel>;
+  public cardProducts$: BehaviorSubject<Array<CardProducts>> = new BehaviorSubject([]);
+  public processedProducts$: BehaviorSubject<Array<ProductModel>> = new BehaviorSubject([]);
   public totalCost: number;
   public itemsInCard: number;
 
@@ -21,31 +23,30 @@ export class CardService {
     private productsService: ProductsService,
     private messageService: MessageService
   ) {
-    this.loadProductsForCurrentUser();
-    this.loadAllProductFromCard();
-    this.recalculateTotalCost();
-    this.recalculateItemsInCard();
+    this.authService.activeUser$.pipe(filter(user => !!user)).subscribe((user) => {
+      this.updateCardStateForUser();
+    });
   }
 
   public clearCard(): void {
-    this.cardProducts = [];
+    this.cardProducts$.next([]);
     this.updateCardStateForUser();
   }
 
   public removeAllItemsById(id: number): void {
-    const index = this.cardProducts.findIndex((cp => id === cp.id));
+    const index = this.cardProducts$.value.findIndex((cp => id === cp.id));
     if (index > -1) {
-      this.cardProducts.splice(index, 1);
+      this.cardProducts$.value.splice(index, 1);
       this.updateCardStateForUser();
       this.messageService.success('You have been removed items');
     }
   }
 
   public removeIfExist(id: number): void {
-    const index = this.cardProducts.findIndex((cp => id === cp.id));
+    const index = this.cardProducts$.value.findIndex((cp => id === cp.id));
 
     if (index > -1) {
-      const count = this.cardProducts[index].count--;
+      const count = this.cardProducts$.value[index].count--;
       if (count === 0) {
         this.removeAllItemsById(id);
       } else {
@@ -56,7 +57,7 @@ export class CardService {
   }
 
   public findCardProductById(id: number): CardProducts {
-    return this.cardProducts.find((cp => id === cp.id));
+    return this.cardProducts$.value.find((cp => id === cp.id));
   }
 
   public addToCard(id: number): void {
@@ -69,43 +70,46 @@ export class CardService {
         count: 1,
         pricePerOne: this.productsService.getProductById(id).price
       };
-      this.cardProducts.push(newCardProduct);
+      const newCardProducts = [...this.cardProducts$.value, newCardProduct];
+      this.cardProducts$.next(newCardProducts);
     }
     this.updateCardStateForUser();
   }
 
   public updateCardStateForUser(): void {
-    LocalStorageService.stringifyItem(this.keyForUserCards, this.cardProducts);
+    debugger;
+    LocalStorageService.stringifyItem(this.keyForUserCards, this.cardProducts$.value);
     this.loadProductsForCurrentUser();
     this.recalculateTotalCost();
     this.recalculateItemsInCard();
+    this.loadAllProductFromCard();
   }
 
   private recalculateTotalCost(): void {
-    this.totalCost = this.cardProducts.reduce((a, b) => a + (b.pricePerOne * b.count), 0);
+    this.totalCost = this.cardProducts$.value.reduce((a, b) => a + (b.pricePerOne * b.count), 0);
   }
 
   private recalculateItemsInCard(): void {
-    this.itemsInCard = this.cardProducts.reduce((a, b) => a + b.count, 0);
+    this.itemsInCard = this.cardProducts$.value.reduce((a, b) => a + b.count, 0);
   }
 
   private get keyForUserCards(): string {
-    return this.authService.activeUser ? `productListFor${this.authService.activeUser.login}` : null;
+    return this.authService.activeUser$.value ? `productListFor${this.authService.activeUser$.value.login}` : null;
   }
 
 
   private loadAllProductFromCard(): void {
     const products = this.productsService.fetchProducts();
-    this.processedProducts = products.filter((product) =>
-      this.cardProducts.find((cp => product.id === cp.id))
+    this.processedProducts$.next(products.filter((product) =>
+      this.cardProducts$.value.find((cp => product.id === cp.id))
     ).map(processedProduct => {
       processedProduct.count = this.findCardProductById(processedProduct.id).count;
       return processedProduct;
-    });
+    }));
   }
 
   private loadProductsForCurrentUser(): void {
-    this.cardProducts = LocalStorageService
-      .parseItem<Array<CardProducts>>(this.keyForUserCards) || [];
+    this.cardProducts$.next(LocalStorageService
+      .parseItem<Array<CardProducts>>(this.keyForUserCards) || []);
   }
 }

@@ -1,5 +1,6 @@
 <div class="card-header">
-    <p routerLink="/about" routerLinkActive="router-link-active" >about us</p>
+    <p routerLink="/about">about us</p>
+    <p *ngIf="authService.isLoginnedAndNotAdmin()" routerLink="/orders">My Orders</p>
     <p *ngIf="authService.isLoginnedAndNotAdmin()" routerLink="/card-list" routerLinkActive="router-link-active" >
       Your card: {{cardService.itemsInCard > 0 ? "(" + cardService.itemsInCard + ")" + " items" : ''}}
       Total price: {{cardService.totalCost}}$

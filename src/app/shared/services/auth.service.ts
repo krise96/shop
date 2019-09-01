@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { UserModel } from '../models/user/user.model';
 import { LocalStorageService } from './local-storage.service';
 import { Router } from '@angular/router';
-import { CardService } from './card.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +12,11 @@ export class AuthService {
 
   private usersList: Array<UserModel>;
   public isLogined: boolean;
-  public activeUser: UserModel;
+  public activeUser$: BehaviorSubject<UserModel> = new BehaviorSubject(null);
 
   constructor(
     private localStorageService: LocalStorageService,
     private router: Router,
-    private cardService: CardService,
   ) {
     this.initLoadUsers();
   }
@@ -39,7 +38,7 @@ export class AuthService {
 
   public get role(): string {
     if (this.isLogined) {
-      return this.activeUser.isAdmin ? 'admin' : 'customer';
+      return this.activeUser$.value.isAdmin ? 'admin' : 'customer';
     }
     return 'not logined';
   }
@@ -56,20 +55,19 @@ export class AuthService {
   }
 
   public isLoginnedAndNotAdmin(): boolean {
-    return Boolean(this.isLogined && !this.activeUser.isAdmin);
+    return Boolean(this.isLogined && !this.activeUser$.value.isAdmin);
   }
 
   public isLoginnedAndAdmin(): boolean {
-    return Boolean(this.isLogined && this.activeUser.isAdmin);
+    return Boolean(this.isLogined && this.activeUser$.value.isAdmin);
   }
 
   public login(login: string, password: string): boolean {
     const user = this.findUser(login, password);
     if (user) {
       this.isLogined = true;
-      this.activeUser = user;
+      this.activeUser$.next(user);
       this.updateActiveUser();
-      this.cardService.updateCardStateForUser();
       this.router.navigateByUrl('/');
     }
     return !!user;
@@ -77,7 +75,7 @@ export class AuthService {
 
   public logout(): void {
     this.isLogined = false;
-    this.activeUser = null;
+    this.activeUser$.next(null);
     this.changeUserLocalStorageState();
   }
 
@@ -96,12 +94,12 @@ export class AuthService {
   }
 
   private updateActiveUser() {
-    LocalStorageService.stringifyItem('activeUser', this.activeUser);
+    LocalStorageService.stringifyItem('activeUser', this.activeUser$.value);
   }
 
   private initLoadUsers(): void {
     this.usersList = LocalStorageService.parseItem<Array<UserModel>>('usersList') || [];
-    this.activeUser = LocalStorageService.parseItem<UserModel>('activeUser');
-    this.isLogined = !!this.activeUser;
+    this.activeUser$.next(LocalStorageService.parseItem<UserModel>('activeUser'));
+    this.isLogined = !!this.activeUser$.value;
   }
 }

@@ -7,6 +7,7 @@ import { RoleGuard } from '../shared/guards/role.guard';
 import { AdminProductsComponent } from './components/admin-products/admin-products.component';
 import { AdminProductComponent } from './components/admin-product/admin-product.component';
 import { ProductResolverService } from './services/product-resolver.service';
+import { AdminOrdersComponent } from './components/admin-orders/admin-orders.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
         path: '',
         redirectTo: 'products',
         pathMatch: 'full'
+      },
+      {
+        path: 'orders',
+        component: AdminOrdersComponent
       },
       {
         path: 'products',

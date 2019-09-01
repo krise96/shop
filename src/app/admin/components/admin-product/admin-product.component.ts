@@ -21,7 +21,6 @@ export class AdminProductComponent {
   ) {
     this.activatedRoute.data.subscribe(({product}) => {
       this.product = product;
-      console.log(product);
     });
   }
 

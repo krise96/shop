@@ -25,6 +25,7 @@ export interface CardProducts {
 
 export interface Order {
   cardItems: Array<CardProducts>;
+  products?: Array<ProductModel>;
   time: Date;
   status: string;
   owner: UserModel;

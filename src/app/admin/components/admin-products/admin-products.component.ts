@@ -15,8 +15,4 @@ export class AdminProductsComponent implements OnInit {
   ngOnInit() {
     this.products = this.productService.fetchProducts();
   }
-
-  public onEditClick(): void {
-    console.log('lol');
-  }
 }

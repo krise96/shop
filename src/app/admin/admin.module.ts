@@ -10,20 +10,22 @@ import {
   NzIconModule,
   NzInputModule, NzInputNumberModule,
   NzListModule, NzMenuModule,
-  NzSelectModule
+  NzSelectModule, NzTagModule
 } from 'ng-zorro-antd';
 import { AdminMainComponent } from './components/admin-main/admin-main.component';
 import { AdminProductComponent } from './components/admin-product/admin-product.component';
 import { AdminProductsComponent } from './components/admin-products/admin-products.component';
 import { AdminProductFormComponent } from './components/admin-product-form/admin-product-form.component';
 import { SharedModule } from '../shared/shared.module';
+import { AdminOrdersComponent } from './components/admin-orders/admin-orders.component';
 
 @NgModule({
   declarations: [
     AdminMainComponent,
     AdminProductComponent,
     AdminProductsComponent,
-    AdminProductFormComponent
+    AdminProductFormComponent,
+    AdminOrdersComponent
   ],
   imports: [
     AdminRoutingModule,
@@ -41,6 +43,7 @@ import { SharedModule } from '../shared/shared.module';
     NzSelectModule,
     NzInputNumberModule,
     NzMenuModule,
+    NzTagModule,
   ]
 })
 export class AdminModule {

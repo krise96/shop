@@ -1,0 +1,15 @@
+<div *ngFor="let userOrder of userOrders">
+  <div *ngFor="let order of userOrder">
+    <h1>Order owner: {{order.owner.login}}</h1>
+    <p>Order date: {{order.time}}</p>
+    <nz-tag [nzColor]="'magenta'">{{order.status}}</nz-tag>
+    <p>Order items:</p>
+    <div *ngFor="let product of order.products">
+      <p>{{product.name}} {{product.price}} * {{product.count}} = {{product.price * product.count}}</p>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <hr/>
+  </div>
+</div>

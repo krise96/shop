@@ -5,6 +5,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { AboutComponent } from './shop/about/about.component';
 import { ProductComponent } from './shop/product/components/product/product.component';
 import { CardListComponent } from './shop/card-list/components/card-list/card-list.component';
+import { OrderComponent } from './shop/order/order.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent
+  },
+  {
+    path: 'orders',
+    component: OrderComponent
   },
 ];
 

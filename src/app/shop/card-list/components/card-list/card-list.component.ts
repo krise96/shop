@@ -21,12 +21,12 @@ export class CardListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.products = this.cardService.processedProducts;
+    this.cardService.processedProducts$.subscribe(products => this.products = products);
   }
 
   public sortProducts(field: string, direction: boolean) {
     this.products = this.order.transform(
-      this.cardService.cardProducts,
+      this.cardService.cardProducts$.value,
       field,
       direction
     );
@@ -40,7 +40,7 @@ export class CardListComponent implements OnInit {
   }
 
   public submitOrder() {
-    this.orderService.addOrder(this.cardService.cardProducts);
+    this.orderService.addOrder(this.cardService.cardProducts$.value);
     this.cardService.clearCard();
   }
 

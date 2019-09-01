@@ -28,6 +28,5 @@ export class AboutComponent {
         value: 'krise96@gmail.com',
       }]
       );
-    console.log(this.configService.getSettings());
   }
 }
