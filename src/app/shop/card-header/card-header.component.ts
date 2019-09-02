@@ -9,6 +9,7 @@ import { AuthService } from '../../shared/services/auth.service';
 })
 export class CardHeaderComponent {
 
+  // authService - должен быть публичный, если используется в шаблоне
   constructor(public cardService: CardService, private authService: AuthService) { }
 
   public onLogout(): void {

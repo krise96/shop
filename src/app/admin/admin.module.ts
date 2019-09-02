@@ -33,6 +33,8 @@ import { AdminOrdersComponent } from './components/admin-orders/admin-orders.com
     CommonModule,
     NzInputModule,
     FormsModule,
+    // Может быть стоит собрать все Nz модули в какой-то один модуль и его подключать там,
+    // где нужны эти компоненты
     NzFormModule,
     NzGridModule,
     NzButtonModule,
