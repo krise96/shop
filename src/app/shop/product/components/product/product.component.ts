@@ -16,7 +16,8 @@ export class ProductComponent implements OnInit {
   public asyncTitle = new Observable(subscriber => subscriber.next('Mega super title!'));
 
   constructor(
-    private productService: ProductsService, private cardService: CardService,
+    private productService: ProductsService,
+    private cardService: CardService, // <-- должен быть публичным, используется в шаблоне
     private order: OrderPipe
   ) {
   }
