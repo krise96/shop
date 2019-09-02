@@ -13,6 +13,8 @@ import { GeneratorFactoryService } from '../../shared/services/generator-factory
 export class AboutComponent {
 
   constructor(
+    // Приватные сервисы не должны использоваться в шаблоне
+    // В других компонентах тоже такая проблема есть
     @Optional() private localStorageService: LocalStorageService,
     @Optional() private configService: ConfigOptionsService,
     @Optional() private constantsService: ConstantsService,

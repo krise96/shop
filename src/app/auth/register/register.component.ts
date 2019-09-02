@@ -27,7 +27,7 @@ export class RegisterComponent {
       name,
       login,
       password,
-      isAdmin: Boolean(isAdmin),
+      isAdmin: Boolean(isAdmin), // разве это свойство не boolean? зачем тут Boolean()
     })) {
       this.message.success(`You are registered, welcome, ${name}`);
       this.authService.login(login, password);
