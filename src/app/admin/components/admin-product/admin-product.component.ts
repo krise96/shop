@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ProductModel } from '../../../shared/models/product/product.model';
+import { ProductModel } from '../../../shared/models/product/product.types';
 import { AdminProductFormComponent } from '../admin-product-form/admin-product-form.component';
 import { ProductsService } from '../../../shared/services/products.service';
 import { ActivatedRoute } from '@angular/router';

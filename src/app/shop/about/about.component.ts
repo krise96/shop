@@ -1,4 +1,4 @@
-import { Component, Optional } from '@angular/core';
+import { Component, Inject, Optional } from '@angular/core';
 import { LocalStorageService } from '../../shared/services/local-storage.service';
 import { ConfigOptionsService } from '../../shared/services/config-options.service';
 import { ConstantsService } from '../../shared/services/constants.service';
@@ -13,11 +13,10 @@ import { GeneratorFactoryService } from '../../shared/services/generator-factory
 export class AboutComponent {
 
   constructor(
-    @Optional() private localStorageService: LocalStorageService,
+    @Optional() public constantsService: ConstantsService,
+    @Optional() public generatorFactoryService: GeneratorFactoryService,
     @Optional() private configService: ConfigOptionsService,
-    @Optional() private constantsService: ConstantsService,
     @Optional() private generatorService: GeneratorService,
-    @Optional() private generatorFactoryService: GeneratorFactoryService
   ) {
     this.configService.setSettings([{
       name: 'login',

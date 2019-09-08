@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UserModel } from '../models/user/user.model';
+import { UserTypes } from '../models/user/user.types';
 import { LocalStorageService } from './local-storage.service';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
@@ -10,9 +10,9 @@ import { BehaviorSubject } from 'rxjs';
 export class AuthService {
 
 
-  private usersList: Array<UserModel>;
+  private usersList: Array<UserTypes>;
   public isLogined: boolean;
-  public activeUser$: BehaviorSubject<UserModel> = new BehaviorSubject(null);
+  public activeUser$: BehaviorSubject<UserTypes> = new BehaviorSubject(null);
 
   constructor(
     private localStorageService: LocalStorageService,
@@ -21,7 +21,7 @@ export class AuthService {
     this.initLoadUsers();
   }
 
-  private changeUserLocalStorageState(user?: UserModel): void {
+  private changeUserLocalStorageState(user?: UserTypes): void {
     if (user) {
       LocalStorageService.stringifyItem('activeUser', user);
     } else {
@@ -29,7 +29,7 @@ export class AuthService {
     }
   }
 
-  private isUserValid(user: UserModel): boolean {
+  private isUserValid(user: UserTypes): boolean {
     const hasUserLoginAndPassword = Boolean(user.password && user.login);
     const isItUniqCredentials = Boolean(!this.findUserByLogin(user.login));
 
@@ -43,12 +43,12 @@ export class AuthService {
     return 'not logined';
   }
 
-  public findUserByLogin(login: string): UserModel {
+  public findUserByLogin(login: string): UserTypes {
     return this.usersList
       .find((currentUser) => currentUser.login === login);
   }
 
-  public findUser(login: string, password: string): UserModel {
+  public findUser(login: string, password: string): UserTypes {
     return this.usersList
       .find((currentUser) =>
         currentUser.password === password && currentUser.login === login);
@@ -79,7 +79,7 @@ export class AuthService {
     this.changeUserLocalStorageState();
   }
 
-  public register(user: UserModel): boolean {
+  public register(user: UserTypes): boolean {
     if (this.isUserValid(user)) {
       this.usersList.push(user);
       this.updateLocalStorageUserList();
@@ -98,8 +98,8 @@ export class AuthService {
   }
 
   private initLoadUsers(): void {
-    this.usersList = LocalStorageService.parseItem<Array<UserModel>>('usersList') || [];
-    this.activeUser$.next(LocalStorageService.parseItem<UserModel>('activeUser'));
+    this.usersList = LocalStorageService.parseItem<Array<UserTypes>>('usersList') || [];
+    this.activeUser$.next(LocalStorageService.parseItem<UserTypes>('activeUser'));
     this.isLogined = !!this.activeUser$.value;
   }
 }

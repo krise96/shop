@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { OrderService } from '../../shared/services/order.service';
-import { Order, ProductModel } from '../../shared/models/product/product.model';
-import { CardService } from '../../shared/services/card.service';
+import { Order, ProductModel } from '../../shared/models/product/product.types';
 import { ProductsService } from '../../shared/services/products.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';

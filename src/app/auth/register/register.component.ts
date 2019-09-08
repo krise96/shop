@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../shared/services/auth.service';
-import { UserModel } from '../../shared/models/user/user.model';
+import { UserTypes } from '../../shared/models/user/user.types';
 import { MessageService } from '../../shared/services/message.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { MessageService } from '../../shared/services/message.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
-  public registerForm: UserModel = {
+  public registerForm: UserTypes = {
     login: null,
     password: null,
     isAdmin: null,
@@ -27,7 +27,7 @@ export class RegisterComponent {
       name,
       login,
       password,
-      isAdmin: Boolean(isAdmin),
+      isAdmin,
     })) {
       this.message.success(`You are registered, welcome, ${name}`);
       this.authService.login(login, password);

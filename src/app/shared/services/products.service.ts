@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-
-import { ProductModel } from '../models/product/product.model';
-import { Observable, of } from 'rxjs';
+import { ProductModel } from '../models/product/product.types';
 import { initProducts } from './mocks';
 import { LocalStorageService } from './local-storage.service';
 
@@ -12,7 +10,7 @@ import { LocalStorageService } from './local-storage.service';
 export class ProductsService {
   private productList: Array<ProductModel> = null;
 
-  constructor(private localStorageService: LocalStorageService) {
+  constructor() {
     this.initProductsService();
   }
 

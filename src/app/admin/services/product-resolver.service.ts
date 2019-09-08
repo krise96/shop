@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ProductsService } from '../../shared/services/products.service';
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { ProductModel } from '../../shared/models/product/product.model';
+import { ProductModel } from '../../shared/models/product/product.types';
 
 @Injectable({
   providedIn: 'root'

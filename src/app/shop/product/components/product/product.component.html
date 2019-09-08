@@ -1,6 +1,7 @@
 <h1>{{asyncTitle | async}}</h1>
 <select #sortField (change)="sortProducts(sortField.value, sortDirection.checked)">
   <option value="price">PRICE</option>
+  <option value="name">NAME</option>
 </select>
 ASC
 <input

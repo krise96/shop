@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ProductsService } from './products.service';
-import { ProductModel } from '../models/product/product.model';
+import { ProductModel } from '../models/product/product.types';
 import { LocalStorageService } from './local-storage.service';
 import { AuthService } from './auth.service';
 import { MessageService } from './message.service';
-import { CardProducts } from '../models/product/product.model';
+import { CardProducts } from '../models/product/product.types';
 import { BehaviorSubject } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
@@ -77,7 +77,6 @@ export class CardService {
   }
 
   public updateCardStateForUser(): void {
-    debugger;
     LocalStorageService.stringifyItem(this.keyForUserCards, this.cardProducts$.value);
     this.loadProductsForCurrentUser();
     this.recalculateTotalCost();

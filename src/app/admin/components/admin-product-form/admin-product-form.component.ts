@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ProductModel, ProductTypes } from '../../../shared/models/product/product.model';
+import { ProductTypes, ProductModel } from '../../../shared/models/product/product.types';
 import { Router } from '@angular/router';
 
 const nullProductModel = {

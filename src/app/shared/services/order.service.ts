@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from './local-storage.service';
 import { AuthService } from './auth.service';
-import { CardProducts, Order } from '../models/product/product.model';
+import { CardProducts, Order } from '../models/product/product.types';
 import { BehaviorSubject } from 'rxjs';
 import { filter } from 'rxjs/operators';
 

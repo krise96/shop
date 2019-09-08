@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../shared/services/auth.service';
-import { UserModel } from '../../shared/models/user/user.model';
+import { UserTypes } from '../../shared/models/user/user.types';
 import { MessageService } from '../../shared/services/message.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { MessageService } from '../../shared/services/message.service';
 })
 export class LoginComponent implements OnInit {
 
-  public loginForm: UserModel = { login: null, password: null};
+  public loginForm: UserTypes = { login: null, password: null};
 
   constructor(private authService: AuthService, private message: MessageService) { }
 

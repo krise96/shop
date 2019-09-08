@@ -4,7 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { NzButtonModule, NzCheckboxModule, NzFormModule, NzGridModule, NzInputModule } from 'ng-zorro-antd';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -15,12 +15,8 @@ import { NzButtonModule, NzCheckboxModule, NzFormModule, NzGridModule, NzInputMo
     AuthRoutingModule,
     ReactiveFormsModule,
     CommonModule,
-    NzInputModule,
     FormsModule,
-    NzFormModule,
-    NzGridModule,
-    NzButtonModule,
-    NzCheckboxModule,
+    SharedModule
   ]
 })
 export class AuthModule {

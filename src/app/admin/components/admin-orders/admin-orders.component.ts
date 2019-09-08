@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { OrderService } from '../../../shared/services/order.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Order, ProductModel } from '../../../shared/models/product/product.model';
+import { Order, ProductModel } from '../../../shared/models/product/product.types';
 import { ProductsService } from '../../../shared/services/products.service';
 
 @Component({

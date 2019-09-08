@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../../../shared/services/products.service';
-import { ProductModel } from '../../../../shared/models/product/product.model';
+import { ProductModel } from '../../../../shared/models/product/product.types';
 import { Observable } from 'rxjs';
 import { CardService } from '../../../../shared/services/card.service';
 import { OrderPipe } from '../../../../shared/pipes/order.pipe';
@@ -16,16 +16,17 @@ export class ProductComponent implements OnInit {
   public asyncTitle = new Observable(subscriber => subscriber.next('Mega super title!'));
 
   constructor(
-    private productService: ProductsService, private cardService: CardService,
+    public cardService: CardService,
+    private productService: ProductsService,
     private order: OrderPipe
   ) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.products = this.productService.fetchProducts();
   }
 
-  sortProducts(field: string, direction: boolean) {
+  public sortProducts(field: string, direction: boolean) {
     this.products = this.order.transform(this.products, field, direction);
   }
 }

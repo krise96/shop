@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CardService } from '../../../../shared/services/card.service';
 import { DeleteOutput } from '../../../../shared/models/delete.output.types';
 import { OrderPipe } from '../../../../shared/pipes/order.pipe';
-import { ProductModel } from '../../../../shared/models/product/product.model';
+import { ProductModel } from '../../../../shared/models/product/product.types';
 import { OrderService } from '../../../../shared/services/order.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class CardListComponent implements OnInit {
   public products: Array<ProductModel>;
 
   constructor(
-    private cardService: CardService,
+    public cardService: CardService,
     private orderService: OrderService,
     private order: OrderPipe
   ) { }
@@ -24,7 +24,7 @@ export class CardListComponent implements OnInit {
     this.cardService.processedProducts$.subscribe(products => this.products = products);
   }
 
-  public sortProducts(field: string, direction: boolean) {
+  public sortProducts(field: string, direction: boolean): void {
     this.products = this.order.transform(
       this.cardService.cardProducts$.value,
       field,
@@ -32,19 +32,19 @@ export class CardListComponent implements OnInit {
     );
   }
 
-  public clear() {
+  public clear(): void {
     const confirmResult = confirm('Are you sure want to delete your card list?');
     if (confirmResult) {
       this.cardService.clearCard();
     }
   }
 
-  public submitOrder() {
+  public submitOrder(): void {
     this.orderService.addOrder(this.cardService.cardProducts$.value);
     this.cardService.clearCard();
   }
 
-  onRemove(deleteOutput: DeleteOutput) {
+  public onRemove(deleteOutput: DeleteOutput): void {
     if (!deleteOutput.multiple) {
       this.cardService.removeIfExist(deleteOutput.productId);
     } else {

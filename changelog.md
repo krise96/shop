@@ -27,3 +27,8 @@ Added new pipes for sorting logic, now we can sort in card and in products -list
 will fix comments in next home work.
 
 ------------------
+Added login system, 
+order list and admin panel. Now you can create you own products and edit them.
+------------------
+
+Used http client module, added interceptor, created nzmodule, refactored code according to previous comments

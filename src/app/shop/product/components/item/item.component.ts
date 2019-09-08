@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ProductModel } from 'src/app/shared/models/product/product.model';
+import { ProductModel } from 'src/app/shared/models/product/product.types';
 import { AuthService } from '../../../../shared/services/auth.service';
 
 @Component({

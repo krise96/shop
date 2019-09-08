@@ -1,4 +1,4 @@
-import { UserModel } from '../user/user.model';
+import { UserTypes } from '../user/user.types';
 
 export enum ProductTypes {
     Apple = 'Apple',
@@ -28,5 +28,5 @@ export interface Order {
   products?: Array<ProductModel>;
   time: Date;
   status: string;
-  owner: UserModel;
+  owner: UserTypes;
 }

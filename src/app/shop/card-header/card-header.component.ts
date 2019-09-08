@@ -9,7 +9,10 @@ import { AuthService } from '../../shared/services/auth.service';
 })
 export class CardHeaderComponent {
 
-  constructor(public cardService: CardService, private authService: AuthService) { }
+  constructor(
+    public cardService: CardService,
+    public authService: AuthService,
+  ) { }
 
   public onLogout(): void {
     this.authService.logout();

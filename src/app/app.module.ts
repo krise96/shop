@@ -9,7 +9,6 @@ import { CardListModule } from './shop/card-list/card-list.module';
 import { AboutComponent } from './shop/about/about.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
@@ -29,6 +28,7 @@ registerLocaleData(en);
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     AuthModule,
     AdminModule,
@@ -37,11 +37,9 @@ registerLocaleData(en);
     CardListModule,
     ReactiveFormsModule,
     FormsModule,
-    NgZorroAntdModule,
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
-  bootstrap: [AppComponent, CardHeaderComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

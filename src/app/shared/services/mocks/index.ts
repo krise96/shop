@@ -1,4 +1,4 @@
-import { ProductModel, ProductTypes } from '../../models/product/product.model';
+import { ProductModel, ProductTypes } from '../../models/product/product.types';
 
 export const initProducts: Array<ProductModel> = [
   {
