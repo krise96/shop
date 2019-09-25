@@ -28,7 +28,7 @@ registerLocaleData(en);
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
+    HttpClientModule, // первый раз
     AppRoutingModule,
     AuthModule,
     AdminModule,
@@ -37,7 +37,7 @@ registerLocaleData(en);
     CardListModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule,
+    // HttpClientModule, // второй раз
     BrowserAnimationsModule
   ],
   bootstrap: [AppComponent]

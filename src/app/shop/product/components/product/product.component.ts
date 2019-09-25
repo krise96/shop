@@ -12,6 +12,7 @@ import { OrderPipe } from '../../../../shared/pipes/order.pipe';
 })
 export class ProductComponent implements OnInit {
 
+  // модифиикатор public не нужен
   public products: Array<ProductModel>;
   public asyncTitle = new Observable(subscriber => subscriber.next('Mega super title!'));
 
@@ -26,7 +27,8 @@ export class ProductComponent implements OnInit {
     this.products = this.productService.fetchProducts();
   }
 
-  public sortProducts(field: string, direction: boolean) {
+  // public не нужен модификатор, метод и так публичный
+  sortProducts(field: string, direction: boolean) {
     this.products = this.order.transform(this.products, field, direction);
   }
 }
