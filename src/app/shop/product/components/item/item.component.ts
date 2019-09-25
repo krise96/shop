@@ -12,7 +12,8 @@ export class ItemComponent {
   @Input() product: ProductModel;
   @Output() buy = new EventEmitter<number>();
 
-  constructor(private authService: AuthService) {
+  // Если сервис используется в шаблоне, то он должен быть публичный
+  constructor(public authService: AuthService) {
   }
 
 

@@ -15,6 +15,8 @@ import { NzModule } from './nzModule.module';
     CommonModule,
     NzModule
   ],
+  // Шаред модуль не предназначен для провайдеров,
+  // только компоненты, директивы и пайпы
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
